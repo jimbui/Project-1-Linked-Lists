@@ -1,38 +1,43 @@
-#pragma once
+#ifndef DOUBLENODE_H
+#define DOUBLENODE_H
+
 #include <iostream>
 
-using namespace std;
+using namespace std ;
 
-// Test it later
-template<class T> class DoubleNode
+template<class T> class DoubleNode // needs to test.
 {
-	// ?????????????????????????????
-	friend class DoublyLinkedList;
+	friend class DoublyLinkedList ;
 
 private:
-	DoubleNode<T>* next;
-	DoubleNode<T>* previous;
-	T data;
 
+	T data ;
+	DoubleNode<T>* next ;
+	DoubleNode<T>* previous ;
+	
 public:
-	DoubleNode(const T& Data, DoubleNode<T>* Previous, DoubleNode<T>* Next)
+
+	DoubleNode():data(0) , previous(nullptr) , next(nullptr){}
+
+	DoubleNode(const T& Data , DoubleNode<T>* Previous , DoubleNode<T>* Next)
 	{
-		data = Data;
-		previous = Previous;
-		next = Next;
+		data = Data ;
+		previous = Previous ;
+		next = Next ;
 	}
 
-	~DoubleNode() {}
+	~DoubleNode(){}
 
-	T getData() const { return data; };
-	DoubleNode* getPrevious() const { return previous; };
-	DoubleNode* getNext() const { return next; };
+	T getData() const { return data ; } ;
+	DoubleNode* getPrevious() const { return previous ; } ;
+	DoubleNode* getNext() const { return next ; } ;
 
-	// Test method (remove later)
 	void Display() const
 	{
-		cout << "Data:  " << data << endl;
-		cout << "Next:  " << next << endl;
-		cout << "Previous:  " << previous << endl;
+		cout << "Data:  " << data << endl ;
+		cout << "Next:  " << next << endl ;
+		cout << "Previous:  " << previous << endl ;
 	}
-};
+} ;
+
+#endif

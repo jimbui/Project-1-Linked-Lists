@@ -1,88 +1,83 @@
-#pragma once
+#ifndef CYCLICLINKEDLIST_H
+#define CYCLICLINKEDLIST_H
+
 #include <iostream>
 #include "SingleNode.h"
 
-using namespace std;
+using namespace std ;
 
 template<class T> class CyclicLinkedList
 {
 private:
-	int size;
 
-	SingleNode<T>* head;
-	SingleNode<T>* tail;
+	int size ;
+
+	SingleNode<T>* head ;
+	SingleNode<T>* tail ;
 
 public:
 
-	CyclicLinkedList() :size(0), head(nullptr), tail(nullptr)
-	{
-	}
+	CyclicLinkedList():size(0) , head(nullptr) , tail(nullptr){}
 
 	~CyclicLinkedList()
 	{
-		// Delete all elements
+		// delete all nodes in list.
 	}
 
-	int Size() const { return size; };
-	bool empty() const { return head == nullptr; };
+	int Size() const { return size ; } ; 
+	bool empty() const { return head == nullptr ; } ;
 
-	// Edit later!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	T front() const
+	T front() const // incomplete.
 	{
 		if (empty())
 		{
-			cout << "Underflow exception." << endl;
-			// return an error
-			return -1;
+			cout << "the list is empty , underflow exception." << endl ;
+			return -1 ;
 		}
+
 		else
-			return head->data;
+			return head->data ;
 	}
 
-	T back() const
+	T back() const // incomplete.
 	{
 		if (empty())
 		{
-			cout << "Underflow exception." << endl;
-			// return an error
-			return -1;
+			cout << "the list is empty , underflow exception." << endl ;
+			return -1 ;
 		}
+
 		else
-			return tail->data;
-	}
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-	int count(const T& Data) const
-	{
-		// Iterate through the list and increment where (data == Data).  Return counter.
-		return 0;
+			return tail->data ;
 	}
 
-	void push_front(const T& data)
+	int count(const T& Data) const // iterate through the list and increment where (data == Data).  return counter.
 	{
-		// Places an item at the front of the list and updates head pointer
+		return 0 ;
 	}
 
-	void push_back(const T& data)
+	void push_front(const T& data) // places an item at the front of the list and updates head pointer.
 	{
-		// Places an item at the back of the list and updates tail pointer
+	}
+
+	void push_back(const T& data) // Places an item at the back of the list and updates tail pointer
+	{
 	}
 
 	T pop_front()
 	{
-		// Deletes the first node, updates the head and tail nodes, and returns the 
-		// value originally stored in that node.
+		// deletes the first node , updates the head and tail nodes
+		// returns the value originally stored in that node.  (or is it return the new value in the node?)
+		// underflow exception if empty.
 	}
 
 	int erase(const T& Data)
 	{
-		// Returns the number of items where (data == Data) that were deleted from the list
-		return 0;
-	}
+		// delete nodes with (data == Data).
+		// returns the number of items deleted.
 
-	// Test method for friend class (remove later)
-	T Test()
-	{
-		cout << "Friend test:  Input 5" << endl;
+		return 0 ;
 	}
-};
+} ;
+
+#endif
