@@ -1,0 +1,130 @@
+// These lines belong in the main.cpp file
+
+// Method declarations
+
+void PushFrontAndBack(DoublyLinkedList<double>& list);
+void PrintDoubleList(const DoublyLinkedList<double>& list);
+void TestUnderflowErrors(const DoublyLinkedList<double>& list);
+void TestDoublyLinkedList();
+
+int main()
+{
+	...
+}
+
+// Method implementation
+
+void TestDoublyLinkedList()
+{
+	DoublyLinkedList<double> d;
+
+	cout << "----------------------------Print w/ empty list----------------------------" << endl;
+	PrintDoubleList(d);
+
+	cout << endl;
+
+	// Please review the front and back methods of the DoublyLinkedList class.
+	cout << "-----------Error Test - Retrieve Front and Back From Empty List------------" << endl;
+	TestUnderflowErrors(d);
+	cout << endl << "Notice how the error messages appear in the output window." << endl;
+
+	cout << endl;
+
+	// Inputs some items into the list.  Push front adds an item to the front of the list, and 
+	// push back adds an item to the back of the list.
+	PushFrontAndBack(d);
+
+	// Prints the list again with the added items
+	cout << "----------------------------Print w/ full list-----------------------------" << endl;
+	PrintDoubleList(d);
+
+	cout << endl;
+
+	// Test deletion
+	cout << "-------------------------------Deletion Test-------------------------------" << endl;
+	int deletion_count = d.erase(0.4);
+	cout << "Deleting 0.4 from list:  Number of deletions - " << deletion_count << endl;
+	deletion_count = d.erase(3.14159265358);
+	cout << "Deleting 3.14159265358 from list:  Number of deletions - " << deletion_count << endl;
+	deletion_count = d.erase(1.2);
+	cout << "Deleting 1.2 from list:  Number of deletions - " << deletion_count << endl;
+	deletion_count = d.erase(8.9);
+	cout << "Deleting 8.9 from list:  Number of deletions - " << deletion_count << endl;
+	deletion_count = d.erase(10.1);
+	cout << "Deleting 10.1 from list:  Number of deletions - " << deletion_count << endl;
+	deletion_count = d.erase(4.6);
+	cout << "Deleting 4.6 from list:  Number of deletions - " << deletion_count << endl;
+
+	PrintDoubleList(d);
+}
+
+// DoublyLinkedList Tests
+
+void PushFrontAndBack(DoublyLinkedList<double>& list)
+{
+	list.push_front(4.6);
+	list.push_back(0.4);
+	list.push_front(1.2);
+	list.push_front(4.6);
+	list.push_front(8.9);
+	list.push_back(10.1);
+	list.push_back(4.6);
+	list.push_front(4.6);
+	list.push_front(4.6);
+}
+
+void TestUnderflowErrors(const DoublyLinkedList<double>& list)
+{
+	double trouble = 0;
+
+	// In order to perform error checking, you should use a try block.
+	// try {...} will check and see if an error was thrown in the method it encapsulates, and
+	// catch (const ...& e) { cerr << e.what() << endl; } will catch the error and display 
+	// its information to the user.
+
+	// back()
+	try
+	{
+		trouble = list.back(); // This method can throw an error instead of returning a value.
+		cout << "Back of list:  " << trouble << endl;
+	}
+	catch (const underflow_error& e)
+	{
+		cerr << e.what() << endl;
+	}
+
+	// front()
+	try
+	{
+		trouble = list.front(); // This method can throw an error instead of returning a value.
+		cout << "Front of list:  " << trouble << endl;
+	}
+	catch (const underflow_error& e)
+	{
+		cerr << e.what() << endl;
+	}
+}
+
+void PrintDoubleList(const DoublyLinkedList<double>& list)
+{
+	int counter = 0;
+
+	// Display size
+	cout << "Size of list = " << list.Size() << endl;
+
+	// Print list forwards
+	cout << "Forward Print:  " << endl << endl << "Head <===>" << endl;
+	for (DoubleNode<double>* p = list.Head(); p != nullptr; p = p->getNext())
+	{
+		cout << "Item[" << counter++ << "] = " << p->getData() << " <===>" << endl;
+	}
+	cout << "Tail" << endl << endl;
+
+	// Print list backwards
+	cout << "Backward Print:  " << endl << endl << "Tail <===>" << endl;
+	for (DoubleNode<double>* p = list.Tail(); p != nullptr; p = p->getPrevious())
+	{
+		cout << "Item[" << --counter << "] = " << p->getData() << " <===>" << endl;
+	}
+	cout << "Head" << endl;
+}

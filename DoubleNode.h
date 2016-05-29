@@ -7,9 +7,9 @@ using namespace std ;
 
 template<class T> class DoubleNode // needs to test.
 {
-	friend class DoublyLinkedList ;
+	// friend class DoublyLinkedList<T>;
 
-private:
+public: // Make private later upon implementing friend functionality
 
 	T data ;
 	DoubleNode<T>* next ;
@@ -26,7 +26,7 @@ public:
 		next = Next ;
 	}
 
-	~DoubleNode(){}
+	~DoubleNode() {};
 
 	T getData() const { return data ; } ;
 	DoubleNode* getPrevious() const { return previous ; } ;
