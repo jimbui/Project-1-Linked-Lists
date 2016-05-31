@@ -2,6 +2,7 @@
 #define DOUBLYLINKEDLIST_H
 
 #include <iostream>
+#include <stdexcept> // underflow_error depends on this library.
 #include "DoubleNode.h"
 
 using namespace std ;
