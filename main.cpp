@@ -2,7 +2,7 @@
 #include "SingleNode.h"
 #include "DoubleNode.h"
 #include "DoublyLinkedList.h"
-// #include "CyclicLinkedList.h"
+#include "CyclicLinkedList.h"
 
 using namespace std ;
 
@@ -11,39 +11,67 @@ using namespace std ;
 void Single_Node_Test() ;
 void Double_Node_Test() ;
 
+// cyclic-linked list tests.
+
+void Random_Test() ;
+void Random_Test_Twooo() ;
+void Exception_Test() ;
+
 // doubly-linked list tests.
 
 void PushFrontAndBack(DoublyLinkedList<double>& list) ;
 void PrintDoubleList(const DoublyLinkedList<double>& list) ;
 void TestUnderflowErrors(const DoublyLinkedList<double>& list) ;
-void TestDoublyLinkedList() ;
+void TestDoublyLinkedList() ; // test all.
 
 // main.
 
 int main()
 {
-	cout << endl << "El Team Projecto Numero 1" << endl << endl ;
+	// the while loop is for clearing the command prompt on linux.
+
+	/*
+
+	int i = 0 ;
+
+	while (i < 50)
+	{
+		std::cout << std::endl ;
+		i++ ;
+	}
+
+	*/
+
+	std::cout << std::endl << "El Team Projecto Numero 1" << std::endl << std::endl ;
+
+	/*	
 
 	Single_Node_Test() ;
 	Double_Node_Test() ;
 	TestDoublyLinkedList() ;
+	Random_Test() ;
+	Random_Test_Twooo() ;
+	Exception_Test() ;
 
-	cout << endl ;
+	*/
+
+	std::cout << endl ;
 	return 666 ;
 }
 
 // node tests.
 
-void Single_Node_Test() 
+void Single_Node_Test()
 {
 	cout << "single node test: " << endl << endl ;
 	SingleNode<int> doubleNode3() ;
+	SingleNode<float> whatisthis(0 , nullptr) ;
 	SingleNode<double> doubleNode2(12.3456789 , nullptr) ;
 	SingleNode<double> doubleNode1(3.14 , &doubleNode2) ;
 
 	doubleNode1.Display() ;
 	doubleNode2.Display() ;
-
+	
 	cout << doubleNode1.getData() << endl ;
 	cout << doubleNode1.getNext() << endl << endl ;
 }
@@ -58,6 +86,58 @@ void Double_Node_Test()
 
 	doubleNode2.Display() ;
 } 
+
+// cyclic-linked list tests.
+
+void Random_Test()
+{
+	CyclicLinkedList<int> the_list ;
+	std::cout << the_list.Size() << endl ;
+
+	if (the_list.empty())
+		std::cout << "empty." << endl ;
+
+	std::cout << the_list.front() << endl ;
+	std::cout << the_list.back() << endl ;
+	the_list.push_front(99999) ;
+	the_list.push_front(123) ;
+	the_list.push_front(123) ;
+	the_list.push_front(123) ;
+	the_list.push_front(123) ;
+	the_list.push_front(888) ;
+	std::cout << the_list.front() << endl ;
+	std::cout << the_list.back() << endl ;
+	the_list.push_back(666) ;
+	std::cout << the_list.back() << endl ;
+	the_list.Display() ;
+	std::cout << "count of number 123:  " << the_list.count(123) << std::endl ;
+	the_list.pop_front() ;
+	the_list.Display() ;
+	// std::cout << std::endl << "CYCLIC CHECK BEGIN: " << std::endl << std::endl ;
+	// the_list.Cyclic_Check() ;
+	std::cout << "let's delete 123:  " << the_list.erase(123) << " deleted." << std::endl ;
+	the_list.Display() ;
+}
+
+void Random_Test_Twooo()
+{
+	CyclicLinkedList<int> the_list ; // an empty list.
+	the_list.Display() ;
+	the_list.pop_front() ;
+	the_list.Display() ;
+	std::cout << the_list.erase(12) << std::endl ;
+	the_list.Display() ;
+	// the_list.push_back(12) ;
+	the_list.push_front(13) ;
+	the_list.Display() ; 
+	the_list.Cyclic_Check() ;
+}
+
+void Exception_Test()
+{
+	CyclicLinkedList<int> the_list ;
+	the_list.pop_front() ;
+}
 
 // doubly-linked list tests.
 

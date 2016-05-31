@@ -7,7 +7,7 @@ using namespace std ;
 
 template<class T> class SingleNode
 {	
-	friend class CyclicLinkedList ; 
+	template<class U> friend class CyclicLinkedList ; // this is the line that makes it bffs.
 
 private:
 
