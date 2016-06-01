@@ -171,6 +171,31 @@ public:
 
 		return num_values_deleted;
 	}
+
+	// For debugging purposes only
+	void Display() const
+	{
+		int counter = 0;
+
+		// Display size
+		cout << "Size of list = " << size << endl;
+
+		// Print list forwards
+		cout << "Forward Print:  " << endl << endl << "Head <===>" << endl;
+		for (DoubleNode<T>* p = head; p != nullptr; p = p->getNext())
+		{
+			cout << "Item[" << counter++ << "] = " << p->getData() << " <===>" << endl;
+		}
+		cout << "Tail" << endl << endl;
+
+		// Print list backwards
+		cout << "Backward Print:  " << endl << endl << "Tail <===>" << endl;
+		for (DoubleNode<T>* p = tail; p != nullptr; p = p->getPrevious())
+		{
+			cout << "Item[" << --counter << "] = " << p->getData() << " <===>" << endl;
+		}
+		cout << "Head" << endl;
+	}
 } ;
 
 #endif
