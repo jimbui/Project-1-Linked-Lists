@@ -93,6 +93,21 @@ public:
 		// deletes the first node , updates the head and tail nodes
 		// returns the value originally stored in that node.  (or is it return the new value in the node?)
 		// underflow exception if empty.
+		if (this->empty())
+		{
+			throw underflow_error("the list is empty , underflow exception.") ;
+			// std::cout << "the list is empty , sorry fam.  " ; return -1 ; // for testing purposes.
+		}
+
+		else
+		{
+			DoubleNode<T>* temp_node = head ;
+			this->tail->next = this->head->next ;
+			delete this->head ;
+			this->head = this->tail->next ;
+			size-- ;
+			return temp_node->data ;
+		}
 	}
 
 	int erase(const T& Data)

@@ -3,6 +3,7 @@
 #include "DoubleNode.h"
 #include "DoublyLinkedList.h"
 #include "CyclicLinkedList.h"
+#include "Command_Processor.h"
 
 using namespace std ;
 
@@ -44,19 +45,21 @@ int main()
 
 	std::cout << std::endl << "El Team Projecto Numero 1" << std::endl << std::endl ;
 
-	/*	
+	
 
-	Single_Node_Test() ;
+	/*Single_Node_Test();
 	Double_Node_Test() ;
 	TestDoublyLinkedList() ;
 	Random_Test() ;
 	Random_Test_Twooo() ;
-	Exception_Test() ;
+	Exception_Test() ;*/
 
-	*/
+	Command_Processor::Process_Commands();
 
 	std::cout << endl ;
-	return 666 ;
+
+	cin.get();
+	return 0;
 }
 
 // node tests.
