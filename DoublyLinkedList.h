@@ -109,6 +109,7 @@ public:
 			if (head == nullptr)
 			{
 				tail = nullptr;
+				return NULL;
 			}
 
 			size-- ;
