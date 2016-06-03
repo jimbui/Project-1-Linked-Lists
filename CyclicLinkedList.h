@@ -122,6 +122,13 @@ public:
 			// std::cout << "the list is empty , sorry fam.  " ; return -1 ; // for testing purposes.
 		}
 
+		else if (size == 1)
+		{
+			this->head = nullptr ;
+			this->tail = nullptr ; 
+			size-- ;
+		}
+
 		else
 		{
 			SingleNode<T>* temp_node = head ;
@@ -133,7 +140,7 @@ public:
 		}
 	}
 
-	int erase(const T& Data)
+	int erase(const T& Data) // broken af right now.
 	{
 		// delete nodes with (data == Data).
 		// returns the number of items deleted.
@@ -151,20 +158,36 @@ public:
 			{
 				if (current_node->data == Data)
 				{
-					if (current_node == head)
+					if (current_node == head && current_node != tail)
 					{
 						this->tail->next = this->head->next ;
+						std::cout << "1" << std::endl ;
 						delete head ;
+						head = nullptr ;
 						this->head = this->tail->next ;
 						deleted++ ;
 						size-- ;
 						current_node = head ;
 					}
 
+					else if (current_node == head && current_node == tail)
+					{
+						this->head = nullptr ;
+						this->tail = nullptr ;
+						std::cout << "2" << std::endl ;
+						delete current_node ;
+						current_node = nullptr ;
+						size-- ;
+						deleted++ ;
+						return deleted ;
+					}
+
 					else 
 					{
 						previous_node->next = current_node->next ;
+						std::cout << "3" << std::endl ;
 						delete current_node ;
+						current_node = nullptr ;
 						deleted++ ;
 						size-- ;
 						current_node = head ;
@@ -178,12 +201,17 @@ public:
 				}
 			}
 
-			if (current_node->data == Data)
+			if (current_node->data == Data && this->head->next != nullptr && this->tail->next != nullptr)
 			{
 				previous_node->next = current_node->next ;
+				std::cout << "4" << std::endl ;
 				delete current_node ;
+				// delete head ;
+				// delete tail ;
+				current_node = nullptr ;
+				head = nullptr ;
 				tail = previous_node ;
-				delete previous_node ;
+				std::cout << "5" << std::endl ;
 				deleted++ ;
 				size-- ;
 			}
@@ -216,7 +244,8 @@ public:
 				i++ ;
 			}
 
-			std::cout << i << ":  " << current_node->data << std::endl ;
+			if (current_node != nullptr)
+				std::cout << i << ":  " << current_node->data << std::endl ;
 		}
 	}
 
