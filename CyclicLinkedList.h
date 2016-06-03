@@ -146,8 +146,9 @@ public:
 		SingleNode<T>* current_node = head ;
 		SingleNode<T>* previous_node = tail ;
 		std::cout << "size: " << size << endl ;
+
 		if (this->empty())
-			std::cout << "yo the list be empty." << std::endl ;
+			return 0 ;
 
 		else
 		{
@@ -170,7 +171,7 @@ public:
 					current_node = head ;
 					previous_node = tail ;
 					deleted++ ;
-					std::cout << "here: 1 : " << size << endl ;
+					//std::cout << "here: 1 : " << size << endl ;
 					size-- ;
 				}
 
@@ -195,7 +196,7 @@ public:
 					current_node = head ;
 					previous_node = tail ;
 					deleted++ ;
-					std::cout << "here: 1 : " << size << endl ;
+					//std::cout << "here: 1 : " << size << endl ;
 					size-- ;
 				}
 
@@ -210,7 +211,7 @@ public:
 					tail = previous_node ;
 					size-- ;
 					deleted++ ;
-					std::cout << "size: " << size << endl ;
+					//std::cout << "size: " << size << endl ;
 				}
 
 				return deleted ;
