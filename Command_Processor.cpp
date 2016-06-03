@@ -164,7 +164,7 @@ void Command_Processor::Process_Command_1(const string& cmd)
                 cerr << endl << "Cannot print list. List has not been created yet or is empty." << endl;
 				}
 		else Cyclic_list.Display();
-		command_state = State_Selected2;
+		command_state = State_Selected;
 
 	}
     else
