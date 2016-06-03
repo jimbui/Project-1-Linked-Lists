@@ -225,7 +225,7 @@ public:
 		int i = 1 ;
 		SingleNode<T>* current_node = head ;
 
-		if (this->empty())
+		if (size == 0)
 			std::cout << "yo the list be empty." << std::endl ;
 /*
 		else if (this->size == 1)
