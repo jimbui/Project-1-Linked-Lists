@@ -9,13 +9,11 @@ template<class T> class DoubleNode // needs to test.
 {
 	// friend class DoublyLinkedList<T>;
 
-private:
+public: // Make private later upon implementing friend functionality
 
 	T data ;
 	DoubleNode<T>* next ;
 	DoubleNode<T>* previous ;
-
-	template<class U> friend class DoublyLinkedList;
 	
 public:
 
@@ -28,7 +26,7 @@ public:
 		next = Next ;
 	}
 
-	// ~DoubleNode() {};
+	~DoubleNode() {};
 
 	T getData() const { return data ; } ;
 	DoubleNode* getPrevious() const { return previous ; } ;

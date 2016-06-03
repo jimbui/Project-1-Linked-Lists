@@ -25,6 +25,10 @@ void PrintDoubleList(const DoublyLinkedList<double>& list) ;
 void TestUnderflowErrors(const DoublyLinkedList<double>& list) ;
 void TestDoublyLinkedList() ; // test all.
 
+// test pop front doubly
+
+void pop_front_doubly_test();
+
 // main.
 
 int main()
@@ -47,12 +51,13 @@ int main()
 
 	
 
-	/*Single_Node_Test();
-	Double_Node_Test() ;
-	TestDoublyLinkedList() ;
-	Random_Test() ;
-	Random_Test_Twooo() ;
-	Exception_Test() ;*/
+	//Single_Node_Test();
+	//Double_Node_Test() ;
+	//TestDoublyLinkedList() ;
+	//Random_Test() ;
+	//Random_Test_Twooo() ;
+	//Exception_Test() ;
+	//pop_front_doubly_test();
 
 	Command_Processor::Process_Commands();
 
@@ -60,6 +65,29 @@ int main()
 
 	cin.get();
 	return 0;
+}
+
+void pop_front_doubly_test()
+{
+	DoublyLinkedList<double> test_list;
+	// print empty list
+	test_list.Display();
+	cout << test_list.Size() << endl;
+
+	//test_list.pop_front();  //exception
+		
+
+	test_list.push_back(23);
+	test_list.push_back(56);
+	test_list.push_front(47);
+
+	test_list.Display();
+
+	//test pop front
+	test_list.pop_front();
+
+	test_list.Display();
+
 }
 
 // node tests.

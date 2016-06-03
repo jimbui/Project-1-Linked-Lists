@@ -8,6 +8,9 @@ Menu* Command_Processor::menus[NR_CMD_STATES];
 
 bool flag = false;
 
+CyclicLinkedList<double> Cyclic_list; 
+DoublyLinkedList<double> Doubly_list;
+
 void Command_Processor::Create_Menus()
 {
     // Menu for Initial command state
@@ -24,6 +27,7 @@ void Command_Processor::Create_Menus()
 	menu->Add_Command("Push Back");
 	menu->Add_Command("Pop Front");
 	menu->Add_Command("Erase");
+	menu->Add_Command("Print List");
     menu->Add_Command("Quit");
     menus[1] = menu;
 
@@ -93,11 +97,11 @@ void Command_Processor::Process_Command_0(const string& cmd)
 // Process command in Cyclic Linked List command state
 void Command_Processor::Process_Command_1(const string& cmd)
 {
-	CyclicLinkedList<double> Cyclic_list;  //Does this go before the cmd?
+	//CyclicLinkedList<double> Cyclic_list;  
 
     if (cmd == "Create Cyclic List")
     {
-        CyclicLinkedList<double> Cyclic_list;
+        //CyclicLinkedList<double> Cyclic_list;
         cout << "List created\n";
 		flag = true;
 		command_state = State_Selected;
@@ -109,12 +113,11 @@ void Command_Processor::Process_Command_1(const string& cmd)
                 cerr << endl << "Cannot insert element. List has not been created yet." << endl;
 				}
 		else {
-				char data;
+				double data;
                 cout << "Enter value to be inserted" << endl;
                 cin >> data;
 				cin.ignore(); //due to error with next menu
 				Cyclic_list.push_front(data);
-
 				cout << "Element Inserted" << endl << endl;
             }
 			
@@ -126,12 +129,11 @@ void Command_Processor::Process_Command_1(const string& cmd)
                 cerr << endl << "Cannot insert element. List has not been created yet." << endl;
 				}
 		else {
-				char data;
+				double data;
                 cout << "Enter value to be inserted" << endl;
                 cin >> data;
 				cin.ignore(); //due to error with next menu
 				Cyclic_list.push_back(data);
-
 				cout << "Element Inserted" << endl << endl;
             }
 			
@@ -141,15 +143,14 @@ void Command_Processor::Process_Command_1(const string& cmd)
 	{
 
 				Cyclic_list.pop_front();
-
-				cout << "Element Inserted" << endl << endl;
+				cout << "Element Erased" << endl << endl;
             
 			
         command_state = State_Selected;
     }
 	else if (cmd == "Erase")
     {
-		char data;
+		double data;
             cout << "Enter value to delete\n-->";
             cin >> data;
 			cin.ignore(); //due to error with next menu
@@ -157,6 +158,15 @@ void Command_Processor::Process_Command_1(const string& cmd)
         cout << "Element Deleted\n";
 		command_state = State_Selected;
     }
+	else if (cmd == "Print List")
+	{  
+		if (!flag) {
+                cerr << endl << "Cannot print list. List has not been created yet or is empty." << endl;
+				}
+		else Cyclic_list.Display();
+		command_state = State_Selected2;
+
+	}
     else
     {
         command_state = Done;
@@ -167,11 +177,10 @@ void Command_Processor::Process_Command_1(const string& cmd)
 // Process command in Doubly Linked List command state
 void Command_Processor::Process_Command_2(const string& cmd)
 {
-	DoublyLinkedList<double> Doubly_list;
+
 
      if (cmd == "Create Doubly List")
     {
-        CyclicLinkedList<double> Doubly_list;
         cout << "List created\n";
 		flag = true;
 		command_state = State_Selected2;
@@ -183,12 +192,11 @@ void Command_Processor::Process_Command_2(const string& cmd)
                 cerr << endl << "Cannot insert element. List has not been created yet." << endl;
 				}
 		else {
-				char data;
-                cout << "Enter value to be inserted" << endl;
+				double data;
+				cout << "Enter value to be inserted" << endl;
                 cin >> data;
 				cin.ignore(); //due to error with next menu
 				Doubly_list.push_front(data);
-
 				cout << "Element Inserted" << endl << endl;
             }
 			
@@ -200,12 +208,11 @@ void Command_Processor::Process_Command_2(const string& cmd)
                 cerr << endl << "Cannot insert element. List has not been created yet." << endl;
 				}
 		else {
-				char data;
+				double data;
                 cout << "Enter value to be inserted" << endl;
                 cin >> data;
 				cin.ignore(); //due to error with next menu
 				Doubly_list.push_back(data);
-
 				cout << "Element Inserted" << endl << endl;
             }
 			
@@ -216,14 +223,14 @@ void Command_Processor::Process_Command_2(const string& cmd)
 
 				Doubly_list.pop_front();
 
-				cout << "Element Inserted" << endl << endl;
+				cout << "Element Erased" << endl << endl;
             
 			
         command_state = State_Selected2;
     }
 	else if (cmd == "Erase")
     {
-		char data;
+		double data;
             cout << "Enter value to delete\n-->";
             cin >> data;
 			cin.ignore(); //due to error with next menu
@@ -233,30 +240,11 @@ void Command_Processor::Process_Command_2(const string& cmd)
     }
 	else if (cmd == "Print List")
 	{  
-		int counter = 0;
-
-	// Display size
-	cout << "Size of list = " << Doubly_list.Size() << endl;
-
-	// Print list forwards
-	cout << "Forward Print:  " << endl << endl << "Head <===>" << endl;
-	for (DoubleNode<double>* p = Doubly_list.Head(); p != nullptr; p = p->getNext())
-	{
-		cout << "Item[" << counter++ << "] = " << p->getData() << " <===>" << endl;
-	}
-	cout << "Tail" << endl << endl;
-
-	// Print list backwards
-	cout << "Backward Print:  " << endl << endl << "Tail <===>" << endl;
-	for (DoubleNode<double>* p = Doubly_list.Tail(); p != nullptr; p = p->getPrevious())
-	{
-		cout << "Item[" << --counter << "] = " << p->getData() << " <===>" << endl;
-	}
-	cout << "Head" << endl;
-
-	cout << "-----------------------------------------" << endl << endl << endl;
-	
-	command_state = State_Selected2;
+		if (!flag) {
+                cerr << endl << "Cannot print list. List has not been created yet or is empty." << endl;
+				}
+		else Doubly_list.Display();
+		command_state = State_Selected2;
 
 	}
     else
@@ -264,3 +252,4 @@ void Command_Processor::Process_Command_2(const string& cmd)
         command_state = Done;
     }
 }
+
