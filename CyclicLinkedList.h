@@ -140,84 +140,82 @@ public:
 		}
 	}
 
-	int erase(const T& Data) // broken af right now.
+	int erase(const T& Data)
 	{
-		// delete nodes with (data == Data).
-		// returns the number of items deleted.
-
 		int deleted = 0 ;
-		SingleNode<T>* previous_node = tail ;
 		SingleNode<T>* current_node = head ;
-
+		SingleNode<T>* previous_node = tail ;
+		std::cout << "size: " << size << endl ;
 		if (this->empty())
-			return 0 ;
+			std::cout << "yo the list be empty." << std::endl ;
 
 		else
 		{
-			while (current_node->next != head) // iterates through list except for tail.
+			while (current_node->next != head)
 			{
 				if (current_node->data == Data)
 				{
-					if (current_node == head && current_node != tail)
+					previous_node->next = current_node->next ;
+
+					if (current_node == head)
 					{
-						this->tail->next = this->head->next ;
-						std::cout << "1" << std::endl ;
-						delete head ;
-						head = nullptr ;
-						this->head = this->tail->next ;
-						deleted++ ;
-						size-- ;
-						current_node = head ;
+						head = current_node->next ;
 					}
 
-					else if (current_node == head && current_node == tail)
+					if (current_node == tail)
 					{
-						this->head = nullptr ;
-						this->tail = nullptr ;
-						std::cout << "2" << std::endl ;
-						delete current_node ;
-						current_node = nullptr ;
-						size-- ;
-						deleted++ ;
-						return deleted ;
+						tail = previous_node ;
 					}
 
-					else 
-					{
-						previous_node->next = current_node->next ;
-						std::cout << "3" << std::endl ;
-						delete current_node ;
-						current_node = nullptr ;
-						deleted++ ;
-						size-- ;
-						current_node = head ;
-					}
+					current_node = head ;
+					previous_node = tail ;
+					deleted++ ;
+					std::cout << "here: 1 : " << size << endl ;
+					size-- ;
 				}
 
-				else
+				current_node = current_node->next ;
+				previous_node = previous_node->next ;
+			}
+
+			if (current_node->data == Data)
 				{
-					current_node = current_node->next ;
-					previous_node = previous_node->next ;
+					previous_node->next = current_node->next ;
+
+					if (current_node == head)
+					{
+						head = current_node->next ;
+					}
+
+					if (current_node == tail)
+					{
+						tail = previous_node ;
+					}
+
+					current_node = head ;
+					previous_node = tail ;
+					deleted++ ;
+					std::cout << "here: 1 : " << size << endl ;
+					size-- ;
 				}
-			}
 
-			if (current_node->data == Data && this->head->next != nullptr && this->tail->next != nullptr)
-			{
-				previous_node->next = current_node->next ;
-				std::cout << "4" << std::endl ;
-				delete current_node ;
-				// delete head ;
-				// delete tail ;
-				current_node = nullptr ;
-				head = nullptr ;
-				tail = previous_node ;
-				std::cout << "5" << std::endl ;
-				deleted++ ;
-				size-- ;
-			}
-		}
+				current_node = current_node->next ;
+				previous_node = previous_node->next ;
 
-		return deleted ;
+		//	if (current_node == current_node)
+			//{
+				if (current_node->data == Data)
+				{
+					previous_node->next = head ;
+					tail = previous_node ;
+					size-- ;
+					deleted++ ;
+					std::cout << "size: " << size << endl ;
+				}
+
+				return deleted ;
+			}
+		//}
 	}
 
 	// for testing purposes.
