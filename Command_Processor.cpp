@@ -101,10 +101,14 @@ void Command_Processor::Process_Command_1(const string& cmd)
 
     if (cmd == "Create Cyclic List")
     {
+		if (flag == true) { cout << "The list was already created" << endl; }
         //CyclicLinkedList<double> Cyclic_list;
-        cout << "List created\n";
-		flag = true;
-		command_state = State_Selected;
+        else 
+		{
+			cout << "List created\n";
+			flag = true;
+			command_state = State_Selected;
+		}
         
     }
     else if (cmd == "Push Front")
@@ -141,11 +145,18 @@ void Command_Processor::Process_Command_1(const string& cmd)
     }
 	else if (cmd == "Pop Front")
 	{
+		double trouble = 0;
 
-				Cyclic_list.pop_front();
-				cout << "Element Erased" << endl << endl;
+		try
+		{
+			trouble = Cyclic_list.pop_front(); // This method can throw an error instead of returning a value.
+			cout << "Element Erased" << endl << endl;
+		}
+		catch (const underflow_error& e)
+		{
+			cerr << e.what() << endl;
+		}
             
-			
         command_state = State_Selected;
     }
 	else if (cmd == "Erase")
@@ -181,9 +192,13 @@ void Command_Processor::Process_Command_2(const string& cmd)
 
      if (cmd == "Create Doubly List")
     {
-        cout << "List created\n";
-		flag = true;
-		command_state = State_Selected2;
+		if (flag == true) { cout << "The list was already created" << endl; }
+		else
+		{
+			cout << "List created\n";
+			flag = true;
+			command_state = State_Selected2;
+		}
         
     }
     else if (cmd == "Push Front")
@@ -220,12 +235,17 @@ void Command_Processor::Process_Command_2(const string& cmd)
     }
 	else if (cmd == "Pop Front")
 	{
+		double trouble = 0;
 
-				Doubly_list.pop_front();
-
-				cout << "Element Erased" << endl << endl;
-            
-			
+		try
+		{
+			trouble = Doubly_list.pop_front(); // This method can throw an error instead of returning a value.
+			cout << "Element Erased" << endl << endl;
+		}
+		catch (const underflow_error& e)
+		{
+			cerr << e.what() << endl;
+		}
         command_state = State_Selected2;
     }
 	else if (cmd == "Erase")
@@ -252,4 +272,3 @@ void Command_Processor::Process_Command_2(const string& cmd)
         command_state = Done;
     }
 }
-
