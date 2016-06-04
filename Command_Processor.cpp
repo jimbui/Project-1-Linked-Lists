@@ -161,19 +161,25 @@ void Command_Processor::Process_Command_1(const string& cmd)
     }
 	else if (cmd == "Erase")
     {
+		if (!flag) { cout << "List has not been created." << endl;}
+		//else if (Cyclic_list.empty()) { cout << "List is empty." << endl;}
+		else {
 		double data;
             cout << "Enter value to delete\n-->";
             cin >> data;
 			cin.ignore(); //due to error with next menu
             Cyclic_list.erase(data);
         cout << "Element Deleted\n";
+		}
+
 		command_state = State_Selected;
     }
 	else if (cmd == "Print List")
 	{  
 		if (!flag) {
-                cerr << endl << "Cannot print list. List has not been created yet or is empty." << endl;
+                cerr << endl << "Cannot print list. List has not been created yet." << endl;
 				}
+		//else if (Doubly_list.empty()) { cout << "List is empty" << endl;}
 		else Cyclic_list.Display();
 		command_state = State_Selected;
 
@@ -250,12 +256,17 @@ void Command_Processor::Process_Command_2(const string& cmd)
     }
 	else if (cmd == "Erase")
     {
-		double data;
+		if (!flag) { cout << "List has not been created." << endl;}
+		else if (Doubly_list.empty()) { cout << "List is empty" << endl;}
+		else {
+			double data;
             cout << "Enter value to delete\n-->";
             cin >> data;
 			cin.ignore(); //due to error with next menu
             Doubly_list.erase(data);
         cout << "Element Deleted\n";
+		}
+
 		command_state = State_Selected2;
     }
 	else if (cmd == "Print List")
@@ -263,6 +274,7 @@ void Command_Processor::Process_Command_2(const string& cmd)
 		if (!flag) {
                 cerr << endl << "Cannot print list. List has not been created yet or is empty." << endl;
 				}
+		else if (Doubly_list.empty()) { cout << "List is empty" << endl;}
 		else Doubly_list.Display();
 		command_state = State_Selected2;
 
