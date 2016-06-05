@@ -4,7 +4,7 @@
 class Menu
 {
 public:
-    static const int MAX_COMMANDS = 10;
+    static const int MAX_COMMANDS = 20;
 
 private:
     std::string* commands[MAX_COMMANDS];

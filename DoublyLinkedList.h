@@ -22,7 +22,10 @@ public:
 
 	~DoublyLinkedList()
 	{
-		// delete all nodes in list.
+		while (head != nullptr)
+		{
+			pop_front();
+		}
 	}
 
 	int Size() const { return size ; } ;
@@ -49,7 +52,26 @@ public:
 
 	int count(const T& Data) const // iterate through the list and increment where (data == Data).  return counter.
 	{
-		return 0 ;
+		DoubleNode<T>* current_node = head ;
+		int i = 0 ;
+
+		if (this->empty())
+			return i ;
+
+		else
+		{
+			while (current_node != NULL && current_node->next != head)
+			{
+				if (current_node->data == Data)
+					i++ ;
+				current_node = current_node->next ;
+			}
+
+			/*if (current_node->data == Data)
+					i++ ;*/
+
+			return i ;
+		}
 	}
 
 	void push_front(const T& data) // places an item at the front of the list and updates head pointer.

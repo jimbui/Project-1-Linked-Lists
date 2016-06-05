@@ -20,10 +20,19 @@ public:
 
 	CyclicLinkedList():size(0) , head(nullptr) , tail(nullptr){} // good.
 
-	~CyclicLinkedList(){} // does this have to be expanded on?
+	~CyclicLinkedList()
+	{
+		while (head != nullptr)
+		{
+			pop_front();
+		}
+
+	} 
 
 	int Size() const {return this->size ; } ; // good.
 	bool empty() const {return this->head == nullptr ; } ; // good.
+	SingleNode<T>* Head() const { return head; };
+	SingleNode<T>* Tail() const { return tail; };
 
 	T front() const // returns the data member of the head node.
 	{
