@@ -107,7 +107,9 @@ public:
 		if (this->empty()) 
 		{
 			this->head = new SingleNode<T>(data , nullptr) ;
+			this->head->next = head ;
 			this->tail = head ;
+			this->tail->next = head ;
 		} 
 
 		else
@@ -133,9 +135,11 @@ public:
 
 		else if (size == 1)
 		{
+			SingleNode<T>* temp_node = head ;
 			this->head = nullptr ;
 			this->tail = nullptr ; 
 			size-- ;
+			return temp_node->data ;
 		}
 
 		else
@@ -154,11 +158,11 @@ public:
 		int deleted = 0 ;
 		SingleNode<T>* current_node = head ;
 		SingleNode<T>* previous_node = tail ;
-		std::cout << "size: " << size << endl ;
+		// std::cout << "size: " << size << endl ;
 		if (this->empty())
 			std::cout << "The list is empty." << std::endl ;
 
-		else
+		else if (size != 1)
 		{
 			while (current_node->next != head)
 			{
@@ -180,6 +184,7 @@ public:
 					previous_node = tail ;
 					deleted++ ;
 					size-- ;
+					// std::cout << "THIS?" << endl ;
 				}
 
 				current_node = current_node->next ;
@@ -187,42 +192,49 @@ public:
 			}
 
 			if (current_node->data == Data)
+			{
+				previous_node->next = current_node->next ;
+
+				if (current_node == head)
 				{
-					previous_node->next = current_node->next ;
-
-					if (current_node == head)
-					{
-						head = current_node->next ;
-					}
-
-					if (current_node == tail)
-					{
-						tail = previous_node ;
-					}
-
-					current_node = head ;
-					previous_node = tail ;
-					deleted++ ;
-					size-- ;
+					head = current_node->next ;
 				}
 
-				current_node = current_node->next ;
-				previous_node = previous_node->next ;
-
-		//	if (current_node == current_node)
-			//{
-				if (current_node->data == Data)
+				if (current_node == tail)
 				{
-					previous_node->next = head ;
 					tail = previous_node ;
-					size-- ;
-					deleted++ ;
-					std::cout << "size: " << size << endl ;
 				}
 
-				return deleted ;
+				current_node = head ;
+				previous_node = tail ;
+				deleted++ ;
+				size-- ;
+				std::cout << "or this?" << endl ; 
 			}
-		//}
+
+			current_node = current_node->next ;
+			previous_node = previous_node->next ;
+
+
+			if (current_node->data == Data)
+			{
+				previous_node->next = head ;
+				tail = previous_node ;
+				size-- ;
+				deleted++ ;
+				std::cout << "size: " << size << endl ;
+			}
+
+			return deleted ;
+		}
+
+		else 
+		{
+			if (current_node->data == Data)
+			{
+				pop_front() ;
+			}
+		}
 	}
 
 	// for testing purposes.
