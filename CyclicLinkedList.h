@@ -155,86 +155,68 @@ public:
 
 	int erase(const T& Data)
 	{
-		int deleted = 0 ;
-		SingleNode<T>* current_node = head ;
-		SingleNode<T>* previous_node = tail ;
-		// std::cout << "size: " << size << endl ;
-		if (this->empty())
-			std::cout << "The list is empty." << std::endl ;
+		// delete nodes with (data == Data).
+		// returns the number of items deleted.
+		int num_values_deleted = 0;
 
-		else if (size != 1)
+		if (head == nullptr) // No items could be deleted because the list was empty
+			return num_values_deleted;
+
+		SingleNode<T>* cur = head;
+		SingleNode<T>* previous = nullptr;
+
+		int stopThisLoop = size;
+
+		while (stopThisLoop > 0)
 		{
-			while (current_node->next != head)
+			if (cur->getData() == Data)
 			{
-				if (current_node->data == Data)
-				{
-					previous_node->next = current_node->next ;
+				num_values_deleted++;
+				size--;
 
-					if (current_node == head)
-					{
-						head = current_node->next ;
+				if (previous == nullptr)  // The item to be deleted is the first in the list
+				{
+					head = cur->getNext();
+
+					delete cur;
+
+					if (size == 0)
+					{ 
+						head = nullptr;
+						tail = nullptr;
+						break;
 					}
 
-					if (current_node == tail)
-					{
-						tail = previous_node ;
-					}
-
-					current_node = head ;
-					previous_node = tail ;
-					deleted++ ;
-					size-- ;
-					// std::cout << "THIS?" << endl ;
+					// head->previous = nullptr;
+					tail->next = head;
+					cur = head;
+					int duh = 0;
 				}
-
-				current_node = current_node->next ;
-				previous_node = previous_node->next ;
-			}
-
-			if (current_node->data == Data)
-			{
-				previous_node->next = current_node->next ;
-
-				if (current_node == head)
+				else if (cur->getNext() == nullptr)  // The item to be deleted is at the end of the list
 				{
-					head = current_node->next ;
+					previous->next = head;
+					delete cur;
+					tail = previous;
+					cur = nullptr;
 				}
-
-				if (current_node == tail)
+				else // The item to be deleted is somewhere in the middle of the list
 				{
-					tail = previous_node ;
+					previous->next = cur->getNext();
+					delete cur;
+					// previous->getNext()->previous = previous;
+					cur = previous->getNext();
 				}
-
-				current_node = head ;
-				previous_node = tail ;
-				deleted++ ;
-				size-- ;
-				std::cout << "or this?" << endl ; 
 			}
-
-			current_node = current_node->next ;
-			previous_node = previous_node->next ;
-
-
-			if (current_node->data == Data)
+			else // Simply traverse the list
 			{
-				previous_node->next = head ;
-				tail = previous_node ;
-				size-- ;
-				deleted++ ;
-				std::cout << "size: " << size << endl ;
+				previous = cur;
+				cur = cur->getNext();
 			}
 
-			return deleted ;
+			stopThisLoop--;
 		}
 
-		else 
-		{
-			if (current_node->data == Data)
-			{
-				pop_front() ;
-			}
-		}
+		return num_values_deleted;
 	}
 
 	// for testing purposes.
