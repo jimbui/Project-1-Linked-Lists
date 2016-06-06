@@ -135,21 +135,22 @@ public:
 
 		else if (size == 1)
 		{
-			SingleNode<T>* temp_node = head ;
+			T data_temp = head->data ;
+			delete this->head ;
 			this->head = nullptr ;
 			this->tail = nullptr ; 
 			size-- ;
-			return temp_node->data ;
+			return data_temp ;
 		}
 
 		else
 		{
-			SingleNode<T>* temp_node = head ;
+			T data_temp = head->data ;
 			this->tail->next = this->head->next ;
 			delete this->head ;
 			this->head = this->tail->next ;
 			size-- ;
-			return temp_node->data ;
+			return data_temp ;
 		}
 	}
 
