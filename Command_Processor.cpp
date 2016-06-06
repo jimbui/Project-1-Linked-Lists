@@ -254,6 +254,8 @@ void Command_Processor::Process_Command_1(const string& cmd)
     }
 	else if (cmd == "Pop Front")
 	{
+		if (!flag1) {cerr << endl << "Cannot pop front element. List has not been created yet." << endl;}
+		else {
 		double trouble = 0;
 
 		try
@@ -264,6 +266,7 @@ void Command_Processor::Process_Command_1(const string& cmd)
 		catch (const underflow_error& e)
 		{
 			cerr << e.what() << endl;
+		}
 		}
             
         command_state = State_Selected;
@@ -277,8 +280,7 @@ void Command_Processor::Process_Command_1(const string& cmd)
             cout << "Enter value to delete\n-->";
             cin >> data;
 			cin.ignore(); //due to error with next menu
-            Cyclic_list->erase(data);
-        cout << "Element Deleted\n";
+        cout <<  Cyclic_list->erase(data) <<" Element(s) Deleted\n";
 		}
 
 		command_state = State_Selected;
@@ -444,6 +446,8 @@ void Command_Processor::Process_Command_2(const string& cmd)
     }
 	else if (cmd == "Pop Front")
 	{
+		if (!flag2) {cerr << endl << "Cannot pop front element. List has not been created yet." << endl;}
+		else {
 		double trouble = 0;
 
 		try
@@ -454,6 +458,7 @@ void Command_Processor::Process_Command_2(const string& cmd)
 		catch (const underflow_error& e)
 		{
 			cerr << e.what() << endl;
+		}
 		}
         command_state = State_Selected2;
     }
@@ -466,8 +471,7 @@ void Command_Processor::Process_Command_2(const string& cmd)
             cout << "Enter value to delete\n-->";
             cin >> data;
 			cin.ignore(); //due to error with next menu
-            Doubly_list->erase(data);
-        cout << "Element Deleted\n";
+        cout << Doubly_list->erase(data) <<" Element(s) Deleted\n";
 		}
 
 		command_state = State_Selected2;
